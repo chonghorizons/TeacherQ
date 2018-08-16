@@ -3,8 +3,8 @@ import io from 'socket.io-client';
 function clientSocket() {
   console.log('clientSocket run');
   this.socket = io('http://localhost:8080');
-  this.socket.emit('test', 'hi, from the client');
-  this.socket.on('test', (data) => { console.log('socket.on(TEST)', data); });
+  this.socket.emit('cts_message', 'hi, from the client');
+  this.socket.on('stc_message', (data) => { console.log('socket.on(stc_message)', data); });
   this.socket.on('errorMessage', (err) => { console.log('FAIL, PROBABLY IN JOIN', err); });
 
   // maybe need to fix curosr re-positioning. zzzzz

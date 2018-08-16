@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Grid, Paper } from '@material-ui/core';
+import clientSocket from './clientSocket';
 
 
 //import clientSocket from './clientSocket';
@@ -8,7 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     console.log('CONSTRUCTOR-THIS-keys', Object.keys(this));
-    // clientSocket.bind(this)();
+    clientSocket.bind(this)();
     const yourName=prompt('What is your name?')
     // SECRETTEACHER gives secretteacher rights
     let a=new Date();
@@ -128,7 +129,7 @@ export default class App extends React.Component {
                   <p>Here is the queue:</p>
                   <ul>
                     {this.state.queue.map((x)=>{
-                      return (<li>
+                      return (<li key={x.name}>
                         {x.name} -- {x.timestamp.toString()}
                         <button onClick={(e)=>this.handleTeacherRemovesStudentClick(e, x.name)}>DEL</button>
                       </li>)
@@ -138,7 +139,7 @@ export default class App extends React.Component {
                 <hr />
                 <div>Here is the completed queue:
                   <ul>
-                    {this.state.completedQueueWithWaitTimes.map((x)=>(<li>{x.name} -- waited {x.waitTime} minutes {x.timestamp.toString()}</li>))}
+                    {this.state.completedQueueWithWaitTimes.map((x)=> (<li key={x.name+x.timestamp.toString()}>{x.name} -- waited {x.waitTime} minutes {x.timestamp.toString()}</li>))}
                   </ul>
                 </div>
               </div> :

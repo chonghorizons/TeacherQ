@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
-
 // // Passport
 // import passport from 'passport';
 // import crypto from 'crypto';
@@ -15,7 +14,7 @@ import methodOverride from 'method-override';
 // import { User } from './models/models.js';
 //
 // import auth from './routes/auth';
-import routes from './routes/routes.js';
+// import routes from './routes/routes.js';
 import serverSocket from './serverSocket';
 
 const app = express();
@@ -24,7 +23,7 @@ const io = require('socket.io')(server);
 
 const port = process.env.PORT || 8080;
 server.listen(port);
-console.log(`Server running at http://127.0.0.1:${port}/`);
+console.log(`Server should be running at http://127.0.0.1:${port}/`);
 
 // Middleware
 app.use(logger('dev'));
@@ -84,6 +83,10 @@ app.use(methodOverride());
 // app.use('/', auth(passport));
 
 app.use('/', routes);
+
+app.get('/testRoute', (req, res) => {
+  res.send('test route!')
+})
 
 // SOCKETS
 serverSocket(io);
